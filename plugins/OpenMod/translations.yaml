@@ -1,0 +1,8 @@
+messages:
+  fake_ip_not_used: "Fake IP not used, bookmark host updating is disabled."
+  gslt_not_set: "GSLT not set, bookmark host updating is disabled."
+  bookmark_host_not_set: "Bookmark host not set, bookmark host updating is disabled."
+  fake_ip_obtained: "Server Fake IP: {IP}"
+  failed_to_obtain_fake_ip: "Failed to obtain server fake IP: {Result}"
+  bookmark_success: "Successfully set bookmark IP to {IP}"
+  bookmark_failed: "Failed to set bookmark IP: {StatusCode}"
