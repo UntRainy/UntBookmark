@@ -21,7 +21,8 @@ Copy `UntBookmark.Shared.dll` and `UntBookmark.OpenMod.dll` to `OpenMod/plugins`
 
 ### Rocket
 
-Copy `UntBookmark.Rocket.dll` to `Rocket/Plugins` folder.
+1. Copy `UntBookmark.Rocket.dll` to `Rocket/Plugins` folder.
+2. Copy `0Harmony.dll` to `Rocket/Libraries` folder.
 
 ## Deploy
 
