@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OpenMod.API.Ioc;
 using SDG.Unturned;
+using Steamworks;
 
 namespace UntBookmark.OpenMod
 {
@@ -42,11 +43,11 @@ namespace UntBookmark.OpenMod
             untBookmark = new UntBookmark.Shared.UntBookmark(Provider.configData.Browser.BookmarkHost, Provider.configData.Browser.Login_Token);
         }
 
-        public async Task<string> UpdateBookmarkIPAsync()
+        public async Task<string> UpdateBookmarkIPAsync(SteamNetworkingFakeIPResult_t? ipResult = null)
         {
             if (untBookmark == null)
                 throw new InvalidOperationException("UntBookmark is disabled.");
-            return await untBookmark.UpdateBookmarkIPAsync();
+            return await untBookmark.UpdateBookmarkIPAsync(ipResult);
         }
     }
 }

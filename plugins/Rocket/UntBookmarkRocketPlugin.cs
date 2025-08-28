@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Rocket.Core.Logging;
 using Rocket.Core.Plugins;
 using SDG.Unturned;
+using Steamworks;
 
 namespace UntBookmark.Rocket
 {
@@ -35,23 +36,27 @@ namespace UntBookmark.Rocket
 
         protected override void Load()
         {
-            Level.onPostLevelLoaded += OnPostLevelLoaded;
+            Shared.Hook.FakeIPCallback += OnFakeIPResult;
+            Shared.Hook.Init();
         }
 
         protected override void Unload()
         {
-            Level.onPostLevelLoaded -= OnPostLevelLoaded;
+            Shared.Hook.Uninit();
+            Shared.Hook.FakeIPCallback -= OnFakeIPResult;
         }
 
-        private void OnPostLevelLoaded(int level)
+        private void OnFakeIPResult(SteamNetworkingFakeIPResult_t result)
         {
             if (UntBookmark == null)
+                return;
+            if (result.m_eResult != EResult.k_EResultOK)
                 return;
             Task.Run(async () =>
             {
                 try
                 {
-                    var ip = await UntBookmark.UpdateBookmarkIPAsync();
+                    var ip = await UntBookmark.UpdateBookmarkIPAsync(result);
                     Logger.Log($"Successfully updated the bookmark IP to {ip}");
                 }
                 catch (Exception e)

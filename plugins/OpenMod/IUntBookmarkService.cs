@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using OpenMod.API.Ioc;
+using Steamworks;
 
 namespace UntBookmark.OpenMod
 {
@@ -8,9 +9,9 @@ namespace UntBookmark.OpenMod
     {
         /// <summary>
         /// Updates the bookmark IP address asynchronously.
-        /// This method retrieves the fake IP address from the Steam Game Server Networking Sockets API
+        /// This method retrieves the fake IP address from the Steam Game Server Networking Sockets API by default.
         /// </summary>
         /// <returns>A task representing the asynchronous operation.</returns>
-        Task<string> UpdateBookmarkIPAsync();
+        Task<string> UpdateBookmarkIPAsync(SteamNetworkingFakeIPResult_t? ipResult = null);
     }
 }

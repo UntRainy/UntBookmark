@@ -6,6 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.4.1">
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="OpenMod.Unturned.Redist" Version="3.25.7.2">
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>

@@ -25,9 +25,13 @@ namespace UntBookmark.Shared
             LoginToken = loginToken;
         }
 
-        private string GetFakeIP()
+        private string GetFakeIP(SteamNetworkingFakeIPResult_t? fakeIPResult)
         {
-            SteamGameServerNetworkingSockets.GetFakeIP(0, out var ip);
+            SteamNetworkingFakeIPResult_t ip;
+            if (fakeIPResult.HasValue)
+                ip = fakeIPResult.Value;
+            else
+                SteamGameServerNetworkingSockets.GetFakeIP(0, out ip);
             if (ip.m_eResult != EResult.k_EResultOK)
             {
                 throw new ExternalException($"Failed to obtain server fake IP: {ip.m_eResult}");
@@ -36,9 +40,9 @@ namespace UntBookmark.Shared
             return $"{ipv4}:{ip.m_unPorts[0]}";
         }
 
-        public async Task<string> UpdateBookmarkIPAsync()
+        public async Task<string> UpdateBookmarkIPAsync(SteamNetworkingFakeIPResult_t? fakeIPResult = null)
         {
-            var ip = GetFakeIP();
+            var ip = GetFakeIP(fakeIPResult);
 #if NETSTANDARD
             var hc = new HttpClient()
             {

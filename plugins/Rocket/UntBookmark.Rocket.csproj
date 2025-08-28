@@ -13,6 +13,7 @@
     <PackageReference Include="LDM.Redist" Version="3.25.7.2">
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Lib.Harmony" Version="2.4.1" />
     <ProjectReference Include="..\Shared\UntBookmark.Shared.csproj" />
   </ItemGroup>
 

@@ -11,6 +11,7 @@
             Parallel="true"
             Internalize="true"
             InputAssemblies="@(InputAssemblies)"
+            LibraryPath="$(OutputPath)"
             TargetKind="Dll"
             OutputFile="$(OutputPath)\$(AssemblyName).dll"
         />
