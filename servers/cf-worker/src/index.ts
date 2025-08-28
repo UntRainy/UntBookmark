@@ -9,7 +9,7 @@ function getServer(url: URL): string | null {
 }
 
 function getGSLTs(env: Env): string[] {
-	const gslts = env.GSLTS.split(",");
+	const gslts = "GSLTS" in env ? env.GSLTS.split(",") : [];
 	for (const key of Object.keys(env)) {
 		if (key.startsWith("GSLT_")) {
 			const value = (env as any)[key];
