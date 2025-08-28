@@ -8,6 +8,19 @@ function getServer(url: URL): string | null {
 	}
 }
 
+function getGSLTs(env: Env): string[] {
+	const gslts = env.GSLTS.split(",");
+	for (const key of Object.keys(env)) {
+		if (key.startsWith("GSLT_")) {
+			const value = (env as any)[key];
+			if (typeof value === "string") {
+				gslts.push(value);
+			}
+		}
+	}
+	return gslts;
+}
+
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
 		if (request.method === "GET") {
@@ -27,7 +40,7 @@ export default {
 			if (!server) {
 				return new Response(null, { status: 400 });
 			}
-			const allowedGslts = env.GSLTS.split(",");
+			const allowedGslts = getGSLTs(env);
 			const gslt = request.headers.get("X-GSLT");
 			if (!gslt || !allowedGslts.includes(gslt)) {
 				return new Response(null, { status: 403 });
